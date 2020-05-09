@@ -448,19 +448,31 @@ module_param_named(
 	int, S_IRUSR | S_IWUSR
 );
 
+#ifdef CONFIG_JEICE_8940
+static int smbchg_default_hvdcp_icl_ma = 1500;
+#else
 static int smbchg_default_hvdcp_icl_ma = 1800;
+#endif
 module_param_named(
 	default_hvdcp_icl_ma, smbchg_default_hvdcp_icl_ma,
 	int, S_IRUSR | S_IWUSR
 );
 
+#ifdef CONFIG_JEICE_8940
+static int smbchg_default_hvdcp3_icl_ma = 1500;
+#else
 static int smbchg_default_hvdcp3_icl_ma = 2600;
+#endif
 module_param_named(
 	default_hvdcp3_icl_ma, smbchg_default_hvdcp3_icl_ma,
 	int, S_IRUSR | S_IWUSR
 );
 
+#ifdef CONFIG_JEICE_8940
+static int smbchg_default_dcp_icl_ma = 1200;
+#else
 static int smbchg_default_dcp_icl_ma = 1800;
+#endif
 module_param_named(
 	default_dcp_icl_ma, smbchg_default_dcp_icl_ma,
 	int, S_IRUSR | S_IWUSR
@@ -4710,7 +4722,11 @@ static int smbchg_set_optimal_charging_mode(struct smbchg_chip *chip, int type)
 }
 
 #define DEFAULT_SDP_MA		500
+#ifdef CONFIG_JEICE_8940
+#define DEFAULT_CDP_MA		1200
+#else
 #define DEFAULT_CDP_MA		1500
+#endif
 static int smbchg_change_usb_supply_type(struct smbchg_chip *chip,
 						enum power_supply_type type)
 {

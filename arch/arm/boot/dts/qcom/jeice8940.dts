@@ -13,17 +13,17 @@
 
 /dts-v1/;
 
-#include "msm8917.dtsi"
-#include "msm8917-pmi8950-mtp.dtsi"
-#include "jeice-common.dtsi"
+#include "msm8940.dtsi"
+#include "msm8940-pmi8950-mtp.dtsi"
+#include "jeice8940-common.dtsi"
 #include "dsi-panel-djn-ft8006u-720p-plus-video.dtsi"
 #include "dsi-panel-guoxian-ft8613-720p-plus-video.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. JEICE";
-	compatible = "qcom,msm8917-mtp", "qcom,msm8917", "qcom,mtp";
+	model = "Qualcomm Technologies, Inc. MSM8940-PMI8950 MTP";
+	compatible = "qcom,msm8940-mtp", "qcom,msm8940", "qcom,mtp";
 	qcom,board-id= <8 0>;
-	qcom,pmic-id = <0x10019 0x010011 0x0 0x0>;
+	qcom,pmic-id = <0x10019 0x020011 0x0 0x0>;
 
 	reserved-memory {
 		secure_mem: secure_region@0 {
@@ -38,7 +38,7 @@
 
 &soc {
 	/delete-node/ hbtp;
-}; 
+};
 
 &i2c_3 {
 		status = "ok";
@@ -47,8 +47,8 @@
 				reg = <0x38>;
 				interrupt-parent = <&tlmm>;
 				interrupts = <65 0x2008>;
-				vdd-supply = <&pm8917_l10>;
-				vcc_i2c-supply = <&pm8917_l5>;
+				vdd-supply = <&pm8937_l10>;
+				vcc_i2c-supply = <&pm8937_l5>;
 				/* pins used by touchscreen */
 				pinctrl-names = "pmx_ts_active","pmx_ts_suspend",
 					"pmx_ts_release";
@@ -78,7 +78,7 @@
 				focaltech,fw-vkey-support;
 				focaltech,ignore-id-check;
 		};
-};	
+};
 
 &i2c_3_sleep {
 	mux {
@@ -128,7 +128,7 @@
 	qcom,model = "msm8952-snd-card-mtp";
 	qcom,msm-hs-micbias-type = "external";
 	qcom,msm-mbhc-hphl-swh = <1>;
-	qcom,msm-mbhc-gnd-swh = <0>;  
+	qcom,msm-mbhc-gnd-swh = <0>;
 
 	qcom,audio-routing =
 		"RX_BIAS", "MCLK",
@@ -139,19 +139,19 @@
 		"MIC BIAS External", "Secondary Mic",
 		"AMIC1", "MIC BIAS External",
 		"AMIC2", "MIC BIAS External2",
- 		"AMIC3", "MIC BIAS External";   
+		"AMIC3", "MIC BIAS External";
 
 	qcom,msm-ext-pa = "quinary","quaternary";
 	qcom,msm-mclk-freq = <9600000>;
 	qcom,msm-gpios =    "pri_i2s",
 			"quin_i2s";
-	qcom,pinctrl-names = 
-		"all_off", 
+	qcom,pinctrl-names =
+		"all_off",
 		"pri_i2s_act",
 		"quin_act",
 		"quin_pri_i2s_act";
-	pinctrl-names = 
-		"all_off", 
+	pinctrl-names =
+		"all_off",
 		"pri_i2s_act",
 		"quin_act",
 		"quin_pri_i2s_act";
@@ -195,17 +195,17 @@
 		"msm-dai-q6-dev.32773", "msm-dai-q6-dev.32770";
 };
 
-&i2c_2 { 
-  awinic@45 { 
+&i2c_2 {
+  awinic@45 {
 		compatible = "awinic,aw2013";
 		reg = <0x45>;
-		vdd-supply = <&pm8917_l10>;
-		vcc-supply = <&pm8917_l6>;
-		awinic,ledr-parameter_array = <1 1 1 1 3 0 0>; 
+		vdd-supply = <&pm8937_l10>;
+		vcc-supply = <&pm8937_l6>;
+		awinic,ledr-parameter_array = <1 1 1 1 3 0 0>;
 		awinic,ledg-parameter_array = <1 2 1 2 3 0 0>;
 		awinic,ledb-parameter_array = <1 2 1 2 3 0 0>;
 	};
-	
+
 	tfa98xx@34 {
 		compatible = "nxp,tfa98xx";
 		reg = <0x34>;
@@ -231,7 +231,7 @@
 			qcom,wave-play-rate-us = <6667>;
 			qcom,actuator-type = "erm";
 			qcom,wave-shape = "square";
-			qcom,vmax-mv = <3100>;
+			qcom,vmax-mv = <3300>;
 			qcom,ilim-ma = <100>;
 			qcom,sc-deb-cycles = <8>;
 			qcom,int-pwm-freq-khz = <505>;

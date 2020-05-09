@@ -832,6 +832,12 @@ config JEICE_COMMON
        help
           Support for the jeice bq board.
 
+config JEICE_8940
+       default n
+       bool "bq jeice board"
+       help
+          Support for the jeice 8940 bq board.
+
 menu "Multiple platform selection"
 	depends on ARCH_MULTIPLATFORM
 
